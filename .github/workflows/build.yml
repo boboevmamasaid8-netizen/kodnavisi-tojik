@@ -5,10 +5,10 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
-      - name: Download Android project
+      - name: Download project
         uses: actions/checkout@v4
 
       - name: Setup Java
@@ -19,9 +19,6 @@ jobs:
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
-
-      - name: Install Gradle
-        uses: gradle/actions/setup-gradle@v4
 
       - name: Create Android project
         run: |
@@ -78,8 +75,7 @@ jobs:
           <manifest xmlns:android="http://schemas.android.com/apk/res/android">
               <application
                   android:theme="@android:style/Theme.Material.Light.NoActionBar"
-                  android:label="Коднависи тоҷик"
-                  android:usesCleartextTraffic="false">
+                  android:label="Коднависи тоҷик">
                   <activity
                       android:name=".MainActivity"
                       android:exported="true">
@@ -104,12 +100,10 @@ jobs:
               @Override
               protected void onCreate(Bundle savedInstanceState) {
                   super.onCreate(savedInstanceState);
-
                   WebView web = new WebView(this);
                   WebSettings settings = web.getSettings();
                   settings.setJavaScriptEnabled(true);
                   web.setWebChromeClient(new android.webkit.WebChromeClient());
-
                   setContentView(web);
                   web.loadUrl("file:///android_asset/index.html");
               }
@@ -117,7 +111,12 @@ jobs:
           EOF
 
       - name: Build APK
-        run: gradle assembleDebug
+        run: |
+          mkdir -p "$ANDROID_HOME/cmdline-tools"
+          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+          gradle wrapper --gradle-version 8.9
+          chmod +x gradlew
+          ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
