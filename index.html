@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Коднависи тоҷик</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0b1020;
+    color: white;
+}
+
+header {
+    padding: 22px 16px;
+    background: linear-gradient(135deg, #1746a2, #7928ca);
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 27px;
+}
+
+header p {
+    margin-bottom: 0;
+    color: #e0e7ff;
+}
+
+nav {
+    display: flex;
+    overflow-x: auto;
+    background: #151c30;
+    padding: 8px;
+    gap: 6px;
+}
+
+nav button {
+    background: #252f49;
+    color: white;
+    border: 0;
+    padding: 12px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+nav button:focus {
+    background: #4f46e5;
+}
+
+main {
+    padding: 16px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.card {
+    background: #151c30;
+    padding: 18px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #293653;
+}
+
+h2 {
+    color: #93c5fd;
+}
+
+.item {
+    background: #222c43;
+    padding: 14px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+button, select {
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.action {
+    border: 0;
+    border-radius: 9px;
+    background: #4f46e5;
+    color: white;
+    padding: 12px 16px;
+    margin-top: 8px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 170px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #42516d;
+    background: #080d19;
+    color: #86efac;
+    font-family: monospace;
+    font-size: 15px;
+}
+
+#result {
+    background: #080d19;
+    color: #86efac;
+    padding: 12px;
+    border-radius: 10px;
+    min-height: 45px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.small {
+    color: #b8c4da;
+    line-height: 1.6;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #a5b4fc;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🇹🇯 Коднависи тоҷик</h1>
+    <p>Барномасозиро бо забони тоҷикӣ омӯз!</p>
+</header>
+
+<nav>
+    <button onclick="showPage('home')">🏠 Асосӣ</button>
+    <button onclick="showPage('lessons')">📚 Дарсҳо</button>
+    <button onclick="showPage('editor')">💻 Муҳаррири код</button>
+    <button onclick="showPage('quiz')">🏆 Олимпиада</button>
+</nav>
+
+<main>
+
+<section id="home">
+    <div class="card">
+        <h2>Хуш омадӣ!</h2>
+        <p class="small">
+            Дар ин барнома ту Python-ро меомӯзӣ,
+            код менависӣ ва дониши худро месанҷӣ.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>📚 Омӯзишро оғоз кун</h2>
+        <p>Дарсҳои одӣ барои навомӯзон.</p>
+        <button class="action" onclick="showPage('lessons')">
+            Оғози омӯзиш
+        </button>
+    </div>
+
+    <div class="card">
+        <h2>💻 Код навис</h2>
+        <p>Муҳаррири кодро кушо ва мисолҳоро санҷ.</p>
+        <button class="action" onclick="showPage('editor')">
+            Кушодани муҳаррир
+        </button>
+    </div>
+</section>
+
+<section id="lessons" hidden>
+    <div class="card">
+        <h2>📚 Дарсҳои Python</h2>
+
+        <div class="item">
+            <h3>Дарси 1. Python чист?</h3>
+            <p>Python забони барномасозӣ аст.</p>
+            <code>print("Салом, Тоҷикистон!")</code>
+            <p class="small">
+                Фармони print() матнро ба экран мебарорад.
+            </p>
+        </div>
+
+        <div class="item">
+            <h3>Дарси 2. Тағйирёбандаҳо</h3>
+            <code>nom = "Али"</code><br>
+            <code>print(nom)</code>
+            <p class="small">
+                Тағйирёбанда барои нигоҳ доштани маълумот истифода мешавад.
+            </p>
+        </div>
+
+        <div class="item">
+            <h3>Дарси 3. Ҳисобкунӣ</h3>
+            <code>a = 10</code><br>
+            <code>b = 5</code><br>
+            <code>print(a + b)</code>
+            <p class="small">Ҷавоб: 15</p>
+        </div>
+
+        <button class="action" onclick="showPage('editor')">
+            Машқ кардан
+        </button>
+    </div>
+</section>
+
+<section id="editor" hidden>
+    <div class="card">
+        <h2>💻 Муҳаррири Python</h2>
+        <p class="small">
+            Код навис ва тугмаи «Иҷро кардан»-ро пахш кун.
+        </p>
+
+        <textarea id="code">print("Салом, Тоҷикистон!")
+print(10 + 5)</textarea>
+
+        <button class="action" onclick="runCode()">
+            ▶️ Иҷро кардан
+        </button>
+
+        <h3>Натиҷа:</h3>
+        <div id="result">Натиҷа дар ин ҷо пайдо мешавад.</div>
+
+        <p class="small">
+            Эзоҳ: ин муҳаррири намоишӣ аст. Барои иҷрои воқеии
+            Python муҳаррики Python ё сервер лозим мешавад.
+        </p>
+    </div>
+</section>
+
+<section id="quiz" hidden>
+    <div class="card">
+        <h2>🏆 Санҷиши дониш</h2>
+        <p id="question">Python барои чӣ истифода мешавад?</p>
+
+        <button class="action" onclick="answer(false)">
+            Барои танҳо расмкашӣ
+        </button><br>
+
+        <button class="action" onclick="answer(true)">
+            Барои барномасозӣ
+        </button><br>
+
+        <button class="action" onclick="answer(false)">
+            Барои занг задан
+        </button>
+
+        <h3 id="score">Хол: 0</h3>
+        <button class="action" onclick="resetQuiz()">
+            Аз нав оғоз кардан
+        </button>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    🇹🇯 Коднависи тоҷик — дониш калиди оянда аст!
+</footer>
+
+<script>
+function showPage(page) {
+    document.querySelectorAll("main section").forEach(section => {
+        section.hidden = true;
+    });
+
+    document.getElementById(page).hidden = false;
+    window.scrollTo(0, 0);
+}
+
+function runCode() {
+    const code = document.getElementById("code").value;
+    const result = document.getElementById("result");
+
+    const match = code.match(
+        /print\(\s*(['"])(.*?)\1\s*\)/
+    );
+
+    const numbers = code.match(
+        /print\(\s*(-?\d+)\s*([+\-*])\s*(-?\d+)\s*\)/
+    );
+
+    let output = [];
+
+    if (match) {
+        output.push(match[2]);
+    }
+
+    if (numbers) {
+        const a = Number(numbers[1]);
+        const b = Number(numbers[3]);
+        const op = numbers[2];
+
+        if (op === "+") output.push(String(a + b));
+        if (op === "-") output.push(String(a - b));
+        if (op === "*") output.push(String(a * b));
+    }
+
+    result.textContent = output.length
+        ? output.join("\n")
+        : "Ин мисолро муҳаррири намоишӣ иҷро карда наметавонад.";
+}
+
+let points = 0;
+let answered = false;
+
+function answer(correct) {
+    if (answered) return;
+
+    answered = true;
+
+    if (correct) {
+        points++;
+        document.getElementById("question").textContent =
+            "Офарин! Ҷавоби ту дуруст аст! 🇹🇯";
+    } else {
+        document.getElementById("question").textContent =
+            "Ҷавоб нодуруст аст. Ҷавоби дуруст: барномасозӣ.";
+    }
+
+    document.getElementById("score").textContent =
+        "Хол: " + points;
+}
+
+function resetQuiz() {
+    answered = false;
+    document.getElementById("question").textContent =
+        "Python барои чӣ истифода мешавад?";
+
+    document.getElementById("score").textContent =
+        "Хол: " + points;
+}
+</script>
+
+</body>
+  </html>index.html
